@@ -1,61 +1,88 @@
-import { Configuration, OpenAIApi } from 'openai';
+import axios from 'axios';
 
-const configuration = new Configuration({
-  apiKey: process.env.OPENAI_API_KEY,
-});
-
-const openai = new OpenAIApi(configuration);
-
-const basePromptPrefix = `
-Give me 5 interview questions asked during a job interview for the following position. Where possible ask questions that are specific to the position. If an organisation is given, include questions specific to the organisation.
-
-Position:        
+//import sdk from 'api';
+const basePromptPrefix = `prompt:\n
 `;
 
+const incomingUser = 'User1'
+const sampleUsers = {
+  '123456': {
+    name: 'User2',
+    hobbies: 'I like to play video games and watch movies. I like to go to the gym and play basketball. I like to go to the beach and swim. I like to go to the park and play with my dog. I like to go to the mall and shop.',
+  },
+  '654321': {
+    name: 'User3',
+    hobbies: 'I like to travel around the world. I like to do charity work. I like to ride horses. I like to play rugby. I like to watch read books. I likw to play computer games. I love generating art using Midjourney.',
+  },
+}
+
+// Instructions.. very important. one \n missing might means a lot!
+// const instruction = 'Tell me what ' + incomingUser +  ' have in common with '+ sampleUsers['123456'].name +'.\n';
+const instruction = 'Tell User1 what ' + incomingUser +  ' he or she have in common with '+ sampleUsers['123456'].name +'.\n';
+
 const generateAction = async (req, res) => {
-  // Run first prompt
-  console.log(`API: ${basePromptPrefix}${req.body.userInput}`)
-
-  const baseCompletion = await openai.createCompletion({
-    model: 'text-davinci-003',
-    prompt: `${basePromptPrefix}${req.body.userInput}`,
-    temperature: 0.8,
-    max_tokens: 500,
-  });
   
-  const basePromptOutput = await baseCompletion.data.choices.pop();
 
-  console.log(basePromptOutput.text);
+  // if the req userInputUsers is not 123456 or 654321, then return error Please enter a valid user id
+  if (req.body.userInputUser !== '123456' && req.body.userInputUser !== '654321') {
+    const data = { text: 'ERROR: Please enter a valid user id. Try 123456 or 654321 for testing.'};
+    return res.status(400).send(data);
+  } 
 
-    // Add your second prompt here
-    const secondPrompt = `
-    Take the interview questions and the position of the job below and generate answers for each questions. Go deep into each one. Include the questions for each answers.
+  const userInputUser = req.body.userInputUser;
+  // 
+  let promptToSend = basePromptPrefix + incomingUser +': ' + req.body.userInputHobbies + '\n\n' + sampleUsers[userInputUser].name + ': ' + sampleUsers[userInputUser].hobbies + '\n\n' + instruction;
 
-    Position: ${req.body.userInput}
+  // Run prompt
+  console.log(`sending prompt: ${promptToSend}`)
 
-    Interview Questions: ${basePromptOutput.text}
+  try {
 
-    Interview Qestions with the respective answers:
-    `;
-
-    console.log(secondPrompt);
-    
-    // I call the OpenAI API a second time with Prompt #2
-    const secondPromptCompletion = await openai.createCompletion({
-      model: 'text-davinci-003',
-      prompt: `${secondPrompt}`,
-      // I set a higher temperature for this one. Up to you!
-      temperature: 0.85,
-      // I also increase max_tokens.
-      max_tokens: 1250,
+    // and then return the response to the client
+    const response = await axios.post('https://api.ai21.com/studio/v1/experimental/j1-grande-instruct/complete', {
+      prompt: promptToSend,
+      numResults: 1,
+      maxTokens: 250,
+      temperature: 0.73,
+      topKReturn: 0,
+      topP: 1,
+      countPenalty: {
+        scale: 0,
+        applyToNumbers: false,
+        applyToPunctuations: false,
+        applyToStopwords: false,
+        applyToWhitespaces: false,
+        applyToEmojis: false
+      },
+      frequencyPenalty: {
+        scale: 0,
+        applyToNumbers: false,
+        applyToPunctuations: false,
+        applyToStopwords: false,
+        applyToWhitespaces: false,
+        applyToEmojis: false
+      },
+      presencePenalty: {
+        scale: 0,
+        applyToNumbers: false,
+        applyToPunctuations: false,
+        applyToStopwords: false,
+        applyToWhitespaces: false,
+        applyToEmojis: false
+      },
+      stopSequences: []
+    }, {
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${process.env.AI21_API_KEY}`
+      }
     });
-    
-    // Get the output
-    const secondPromptOutput = secondPromptCompletion.data.choices.pop();
-
-    // Send over the Prompt #2's output to our UI instead of Prompt #1's.
-    res.status(200).json({ output: secondPromptOutput });
+    console.dir(response.data.completions[0].data);
+    return res.status(200).send(response.data.completions[0].data)
+  } catch (error) {
+    console.log(error);
+    return  res.status(500).send(error); 
+  }
 };
-
 
 export default generateAction;

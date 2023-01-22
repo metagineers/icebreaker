@@ -1,0 +1,236 @@
+{
+    "id": "1c3c4650-6f0a-8c68-a46a-444860e903cd",
+    "prompt": {
+      "text": "List the colors of the rainbow:",
+      "tokens": [
+        {
+          "generatedToken": {
+            "token": "▁List",
+            "logprob": -9.948143005371094,
+            "raw_logprob": -9.948143005371094
+          },
+          "topTokens": null,
+          "textRange": {
+            "start": 0,
+            "end": 4
+          }
+        },
+        {
+          "generatedToken": {
+            "token": "▁the▁colors▁of▁the",
+            "logprob": -13.37099838256836,
+            "raw_logprob": -13.37099838256836
+          },
+          "topTokens": null,
+          "textRange": {
+            "start": 4,
+            "end": 22
+          }
+        },
+        {
+          "generatedToken": {
+            "token": "▁rainbow",
+            "logprob": -0.11235389113426208,
+            "raw_logprob": -0.11235389113426208
+          },
+          "topTokens": null,
+          "textRange": {
+            "start": 22,
+            "end": 30
+          }
+        },
+        {
+          "generatedToken": {
+            "token": ":",
+            "logprob": -3.297410488128662,
+            "raw_logprob": -3.297410488128662
+          },
+          "topTokens": null,
+          "textRange": {
+            "start": 30,
+            "end": 31
+          }
+        }
+      ]
+    },
+    "completions": [
+      {
+        "data": {
+          "text": " red, orange, yellow, green, blue, indigo, violet",
+          "tokens": [
+            {
+              "generatedToken": {
+                "token": "▁red",
+                "logprob": -0.5219995975494385,
+                "raw_logprob": -0.7506569623947144
+              },
+              "topTokens": null,
+              "textRange": {
+                "start": 0,
+                "end": 4
+              }
+            },
+            {
+              "generatedToken": {
+                "token": ",",
+                "logprob": -0.024467287585139275,
+                "raw_logprob": -0.07652785629034042
+              },
+              "topTokens": null,
+              "textRange": {
+                "start": 4,
+                "end": 5
+              }
+            },
+            {
+              "generatedToken": {
+                "token": "▁orange",
+                "logprob": -0.00002992108420585282,
+                "raw_logprob": -0.0008349508279934525
+              },
+              "topTokens": null,
+              "textRange": {
+                "start": 5,
+                "end": 12
+              }
+            },
+            {
+              "generatedToken": {
+                "token": ",",
+                "logprob": -1.1920928244535389e-7,
+                "raw_logprob": -0.000025629668016335927
+              },
+              "topTokens": null,
+              "textRange": {
+                "start": 12,
+                "end": 13
+              }
+            },
+            {
+              "generatedToken": {
+                "token": "▁yellow",
+                "logprob": -0.000009536697689327411,
+                "raw_logprob": -0.0005082983989268541
+              },
+              "topTokens": null,
+              "textRange": {
+                "start": 13,
+                "end": 20
+              }
+            },
+            {
+              "generatedToken": {
+                "token": ",",
+                "logprob": -0.00003373566141817719,
+                "raw_logprob": -0.0008404298569075763
+              },
+              "topTokens": null,
+              "textRange": {
+                "start": 20,
+                "end": 21
+              }
+            },
+            {
+              "generatedToken": {
+                "token": "▁green",
+                "logprob": -0.0000027418097943154862,
+                "raw_logprob": -0.00024005869636312127
+              },
+              "topTokens": null,
+              "textRange": {
+                "start": 21,
+                "end": 27
+              }
+            },
+            {
+              "generatedToken": {
+                "token": ",",
+                "logprob": 0,
+                "raw_logprob": -0.0000020265558760002023
+              },
+              "topTokens": null,
+              "textRange": {
+                "start": 27,
+                "end": 28
+              }
+            },
+            {
+              "generatedToken": {
+                "token": "▁blue",
+                "logprob": -0.0012669878778979182,
+                "raw_logprob": -0.011295536532998085
+              },
+              "topTokens": null,
+              "textRange": {
+                "start": 28,
+                "end": 33
+              }
+            },
+            {
+              "generatedToken": {
+                "token": ",",
+                "logprob": 0,
+                "raw_logprob": -0.000004529942543740617
+              },
+              "topTokens": null,
+              "textRange": {
+                "start": 33,
+                "end": 34
+              }
+            },
+            {
+              "generatedToken": {
+                "token": "▁indigo",
+                "logprob": -0.0032160962000489235,
+                "raw_logprob": -0.024957025423645973
+              },
+              "topTokens": null,
+              "textRange": {
+                "start": 34,
+                "end": 41
+              }
+            },
+            {
+              "generatedToken": {
+                "token": ",",
+                "logprob": -0.0001102625101339072,
+                "raw_logprob": -0.0013269914779812098
+              },
+              "topTokens": null,
+              "textRange": {
+                "start": 41,
+                "end": 42
+              }
+            },
+            {
+              "generatedToken": {
+                "token": "▁violet",
+                "logprob": -0.22370101511478424,
+                "raw_logprob": -0.342126727104187
+              },
+              "topTokens": null,
+              "textRange": {
+                "start": 42,
+                "end": 49
+              }
+            },
+            {
+              "generatedToken": {
+                "token": "<|endoftext|>",
+                "logprob": -0.042640600353479385,
+                "raw_logprob": -0.145750030875206
+              },
+              "topTokens": null,
+              "textRange": {
+                "start": 49,
+                "end": 49
+              }
+            }
+          ]
+        },
+        "finishReason": {
+          "reason": "endoftext"
+        }
+      }
+    ]
+  }
